@@ -12,6 +12,7 @@ import Axios from 'axios';
 class App extends React.Component {
   state = {
     users: [],
+    repos: [],
     user: {},
     loading: false,
     alert: null,
@@ -40,6 +41,17 @@ class App extends React.Component {
     this.setState({ user: res.data, loading: false });
   };
 
+  // Get Users Repos
+
+  getUserRepos = async (username) => {
+    this.setState({ loading: true });
+
+    const res = await Axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITBUB_CLIENT_ID}&client_secreat=${process.env.REACT_APP_GITBUB_CLIENT_REACT_APP_GITBUB_CLIENT_SECREAT}`
+    );
+    this.setState({ repos: res.data, loading: false });
+  };
+
   setAlert = (msg, type) => {
     this.setState({ alert: { msg: msg, type: type } });
 
@@ -47,7 +59,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { users, user, loading, alert } = this.state;
+    const { users, user, loading, alert, repos } = this.state;
     return (
       <Router>
         <div className='App'>
@@ -78,7 +90,9 @@ class App extends React.Component {
                   <User
                     {...props}
                     getUser={this.getUser}
+                    getUserRepos={this.getUserRepos}
                     user={user}
+                    repos={repos}
                     loading={loading}
                   />
                 )}
