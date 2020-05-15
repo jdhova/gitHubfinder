@@ -37,7 +37,7 @@ class App extends React.Component {
     const res = await Axios.get(
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITBUB_CLIENT_ID}&client_secreat=${process.env.REACT_APP_GITBUB_CLIENT_REACT_APP_GITBUB_CLIENT_SECREAT}`
     );
-    this.setState({ users: res.data.items, loading: false });
+    this.setState({ user: res.data, loading: false });
   };
 
   setAlert = (msg, type) => {
