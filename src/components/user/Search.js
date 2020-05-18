@@ -1,15 +1,17 @@
 import React, { useContext, useState } from 'react';
 import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/Alert/alertContext';
 
-const Search = ({ setAlert }) => {
+const Search = () => {
   const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
 
   const [text, setText] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (text === '') {
-      setAlert('field can not be blank', 'light');
+      alertContext.setAlert('field can not be blank', 'light');
     } else {
       githubContext.searchUsers(text);
       setText('');

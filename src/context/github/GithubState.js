@@ -69,9 +69,6 @@ const GithubState = (props) => {
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
-  // set Users
-  // const setUsers = () => dispatch({ type: SET_USERS });
-
   return (
     <GithubContext.Provider
       value={{
