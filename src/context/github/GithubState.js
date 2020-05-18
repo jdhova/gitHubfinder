@@ -7,6 +7,7 @@ import {
   SEARCH_USERS,
   SEARCH_USER,
   GET_USER,
+  SET_USERS,
   CLEAR_USERS,
   GET_REPOS,
   SET_LOADING,
@@ -35,11 +36,23 @@ const GithubState = (props) => {
     });
   };
 
-  // Get Users
+  // Get User
+
   // Get Repos
-  // clear Repos
+
+  // clear Users
+
+  // working on this now
+  // clearUsers
+
+  const clearUsers = () => dispatch({ type: CLEAR_USERS });
+
   // set Loading
+
   const setLoading = () => dispatch({ type: SET_LOADING });
+
+  // set Users
+  // const setUsers = () => dispatch({ type: SET_USERS });
 
   return (
     <GithubContext.Provider
@@ -49,6 +62,7 @@ const GithubState = (props) => {
         repo: state.repo,
         loading: state.loading,
         searchUsers,
+        clearUsers,
       }}
     >
       {props.children}

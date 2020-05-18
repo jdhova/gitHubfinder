@@ -17,17 +17,9 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
-  // const searchUsers = async (text) => {
-  //   const res = await Axios.get(
-  //     `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITBUB_CLIENT_ID}&client_secreat=${process.env.REACT_APP_GITBUB_CLIENT_REACT_APP_GITBUB_CLIENT_SECREAT}`
-  //   );
-  //   setUsers(res.data.items);
-  //   setLoading(false);
+  // const clearUsers = () => {
+  //   setUsers({ users: [], loading: false });
   // };
-
-  const clearUsers = () => {
-    setUsers({ users: [], loading: false });
-  };
 
   // Get Single GitHub User
 
@@ -73,11 +65,11 @@ const App = () => {
                 render={(props) => (
                   <Fragment>
                     <Search
-                      clearUsers={clearUsers}
-                      showClear={users.length > 0 ? true : false}
+                      // clearUsers={clearUsers}
+                      // showClear={users.length > 0 ? true : false}
                       setAlert={showAlert}
                     />
-                    <Users users={users} loading={loading} />
+                    <Users />
                   </Fragment>
                 )}
               />
