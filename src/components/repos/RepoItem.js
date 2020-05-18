@@ -1,7 +1,5 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
 const RepoItem = ({ repo }) => {
   return (
     <div className='card'>
@@ -12,7 +10,4 @@ const RepoItem = ({ repo }) => {
   );
 };
 
-RepoItem.prototype = {
-  repo: PropTypes.object.isRequired,
-};
 export default RepoItem;
