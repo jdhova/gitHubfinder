@@ -5,15 +5,22 @@ import GithubReducer from './githubReducer';
 
 import {
   SEARCH_USERS,
-  SEARCH_USER,
   GET_USER,
-  SET_USERS,
   CLEAR_USERS,
   GET_REPOS,
   SET_LOADING,
-  SET_ALERT,
-  REMOVE_ALERT,
 } from '../types';
+
+let githubClientId;
+let githubClientSecret;
+
+if (process.env.NODE_ENV !== 'production') {
+  githubClientId = process.env.REACT_APP_GITBUB_CLIENT_ID;
+  githubClientSecret = process.env.REACT_APP_GITBUB_CLIENT_SECREAT;
+} else {
+  githubClientId = process.env.GITBUB_CLIENT_ID;
+  githubClientSecret = process.env.GITBUB_CLIENT_SECREAT;
+}
 
 const GithubState = (props) => {
   const initialState = {
@@ -28,7 +35,7 @@ const GithubState = (props) => {
   const searchUsers = async (text) => {
     setLoading();
     const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITBUB_CLIENT_ID}&client_secreat=${process.env.REACT_APP_GITBUB_CLIENT_REACT_APP_GITBUB_CLIENT_SECREAT}`
+      `https://api.github.com/search/users?q=${text}&client_id=${githubClientId}&client_secreat=${githubClientSecret}`
     );
     dispatch({
       type: SEARCH_USERS,
@@ -42,7 +49,7 @@ const GithubState = (props) => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITBUB_CLIENT_ID}&client_secreat=${process.env.REACT_APP_GITBUB_CLIENT_REACT_APP_GITBUB_CLIENT_SECREAT}`
+      `https://api.github.com/users/${username}?client_id=${githubClientId}&client_secreat=${githubClientSecret}`
     );
     dispatch({ type: GET_USER, payload: res.data });
   };
@@ -53,7 +60,7 @@ const GithubState = (props) => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITBUB_CLIENT_ID}&client_secreat=${process.env.REACT_APP_GITBUB_CLIENT_REACT_APP_GITBUB_CLIENT_SECREAT}`
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${githubClientId}&client_secreat=${githubClientSecret}`
     );
     dispatch({
       type: GET_REPOS,
@@ -89,3 +96,16 @@ const GithubState = (props) => {
 };
 
 export default GithubState;
+
+// if (process.env.NODE_ENV !== 'production') {
+//   githubClientId = process.env.REACT_APP_GITBUB_CLIENT_ID;
+//   githubClientSecret =
+//     process.env.REACT_APP_GITBUB_CLIENT_REACT_APP_GITBUB_CLIENT_SECREAT;
+// } else {
+//   githubClientId = process.env.REACT_APP_GITBUB_CLIENT_ID;
+//   githubClientSecret =
+//     process.env.REACT_APP_GITBUB_CLIENT_REACT_APP_GITBUB_CLIENT_SECREAT;
+// }
+
+// process.env.REACT_APP_GITBUB_CLIENT_SECREAT
+// process.env.REACT_APP_GITBUB_CLIENT_SECREAT
